@@ -1,15 +1,25 @@
-<h1 align="center">Hi 👋, I'm Nathaly Vivas</h1>
-<h3 align="center">Student in Engineering in Information Technology</h3>
+<h1 align="center">Paso a Paso</h1>
+<h3 align="center">Airflow en Docker</h3>
 
-- 📝 I regularly write articles on [IT Green](IT Green)
+<h4 align="left">Herramientas Utilizadas</h4>
 
-- 💬 Ask me about **Show the world the power of technological tools.**
 
-- 📫 How to reach me **https://www.linkedin.com/in/nathaly-melissa-vivas-pin-420129238**
+- 📝 Visual Studio Code
 
-- 📄 Know about my experiences [Management of software development projects](Management of software development projects)
+- 💬 Python 3.11.3 <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> 
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://linkedin.com/in/nathaly melissa vivas pin" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="nathaly melissa vivas pin" height="30" width="40" /></a>
-</p>
+- 📫 Docker 23.0.5
+
+<h3 align="left">Paso a Paso</h3>
+
+1. Instala Visual Studio Code en tu máquina.
+   - Descarga el instalador desde [https://code.visualstudio.com](https://code.visualstudio.com) y sigue las instrucciones de instalación para tu sistema operativo.
+2. Instala Python 3.11.3.
+   - Ve al sitio web oficial de Python en [https://www.python.org](https://www.python.org) y descarga el instalador correspondiente a tu sistema operativo.
+   - Sigue las instrucciones de instalación para configurar Python en tu máquina.
+3. Configura Docker 23.0.5.
+   - Visita [https://www.docker.com](https://www.docker.com) y descarga Docker para tu sistema operativo.
+   - Sigue las instrucciones de instalación proporcionadas por Docker para configurar Docker en tu máquina.
+<hr>
+
+
