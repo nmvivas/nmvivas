@@ -11,9 +11,9 @@
 - 📌 Docker compose v2.17.3
 - 📌 Dbeaver 
 
-<h3 align="left">Paso a Paso </h3>
+<h3 align="left">--- Paso a Paso --- </h3>
 <hr>
-<h3 align="left">Instalación</h3>
+<h3 align="left">➤ Instalación</h3>
 1. Instala Visual Studio Code en tu máquina.
    - Descarga el instalador desde [https://code.visualstudio.com](https://code.visualstudio.com) y sigue las instrucciones de instalación para tu sistema operativo.
    
@@ -31,7 +31,7 @@
 
 <hr> 
 
-<h3 align="left">Configuración de docker compose</h3>
+<h3 align="left">♠ Configuración de docker compose</h3>
 El archivo se encuentra en el repositorio con el nombre ***docker-compose.yaml***
 
 Este es un archivo de configuración de Docker Compose que define los servicios necesarios para ejecutar Apache Airflow en contenedores Docker.
