@@ -2,18 +2,13 @@
 <h3 align="center">Airflow en Docker</h3>
 
 <h4 align="left">Herramientas Utilizadas</h4>
-
-
 - 📝 Visual Studio Code
-
 - 💬 Python 3.11.3 <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="20" height="20"/> </a> 
-
 - 📫 Docker 23.0.5
 
 <h3 align="left">Paso a Paso</h3>
 <hr>
 <h3 align="left">Instalación</h3>
-
 1. Instala Visual Studio Code en tu máquina.
    - Descarga el instalador desde [https://code.visualstudio.com](https://code.visualstudio.com) y sigue las instrucciones de instalación para tu sistema operativo.
 2. Instala Python 3.11.3.
@@ -27,6 +22,7 @@
     las instrucciones para instalar Docker Compose en tu sistema operativo.4. Instala Docker Compose.
 
 <hr> 
+<h4 align="left">docker-compose.yml</h4>
 
 
 
