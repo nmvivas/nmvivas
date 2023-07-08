@@ -31,7 +31,7 @@
 
 <hr> 
 
-<h3 align="left">♠ Configuración de docker compose</h3>
+<h3 align="left">➤ Configuración de docker compose</h3>
 El archivo se encuentra en el repositorio con el nombre ***docker-compose.yaml***
 
 Este es un archivo de configuración de Docker Compose que define los servicios necesarios para ejecutar Apache Airflow en contenedores Docker.
@@ -58,7 +58,7 @@ El servicio scheduler depende del servicio webserver y utiliza la misma imagen a
 
 <hr>
 
-<h3 align="left">Configuracion de la base de Datos</h3>
+<h3 align="left">➤ Configuracion de la base de Datos</h3>
 
 Para la configuración de la base de datos, se utilizó DBeaver, una herramienta de gestión de bases de datos. A continuación, se detallan los pasos para configurar la conexión con PostgreSQL y crear una base de datos para Airflow.
 
@@ -92,7 +92,7 @@ Con estos pasos, has configurado correctamente la conexión a PostgreSQL y cread
 <hr> 
 Una vez que ya los contenderores de docker esten funcional y pueda acceder a la interfaz de airflow. Verá algo así 
 ....
-<h3 align="left">Creación de un DAG con procesos ETL</h3>
+<h3 align="left">➤ Creación de un DAG con procesos ETL</h3>
 Este DAG utiliza un conjunto de datos en formato .csv que contiene estadísticas sobre crímenes en la India. El conjunto de datos se llama "20_Victims_of_rape.csv" y se puede encontrar en la página https://www.kaggle.com/code/himanshukamal/victims-of-rape/input?select=20_Victims_of_rape.csv.
 
 
