@@ -27,8 +27,9 @@
     las instrucciones para instalar Docker Compose en tu sistema operativo.4. Instala Docker Compose.
 
 <hr> 
-<h4 align="left">Configuración de docker compose</h4>
-El archivo se encuentra en el repositorio con el nombre docker-compose.yaml
+
+<h3 align="left">Configuración de docker compose</h3>
+El archivo se encuentra en el repositorio con el nombre ***docker-compose.yaml***
 Este es un archivo de configuración de Docker Compose que define los servicios necesarios para ejecutar Apache Airflow en contenedores Docker.
 Está estructurado de la siguiente manera: 
 
@@ -36,7 +37,6 @@ Está estructurado de la siguiente manera:
 La versión utilizada en este archivo de configuración de Docker Compose es `3.7`. Asegúrate de tener instalada la versión adecuada de Docker Compose para que funcione correctamente.
 ### Servicios
 El archivo de configuración define los siguientes servicios:
-"revisar docker-compose.yaml"
 
 Este código de Docker Compose define dos servicios: webserver y scheduler. 
 - El servicio webserver utiliza la imagen apache/airflow:2.6.2 y se reinicia siempre.
@@ -47,6 +47,46 @@ Este código de Docker Compose define dos servicios: webserver y scheduler.
 El servicio scheduler depende del servicio webserver y utiliza la misma imagen apache/airflow:2.6.2. 
 - Está configurado para utilizar el mismo executor local y la misma conexión de base de datos que el servicio webserver.
 - Monta los mismos volúmenes y realiza una inicialización de la base de datos de Airflow antes de ejecutar el scheduler.
+
+  ***Recuerda ajustar las variables de entorno, los volúmenes y los puertos según tus necesidades. Además, asegúrate de tener la red apachetl correctamente configurada en tu entorno Docker.***
+
+<hr>
+
+<h3 align="left">Configuracion d ela base de Datos</h3>
+
+Para la configuración de la base de datos, se utilizó DBeaver, una herramienta de gestión de bases de datos. A continuación, se detallan los pasos para configurar la conexión con PostgreSQL y crear una base de datos para Airflow.
+
+1. Instala DBeaver en tu máquina.
+   - Descarga el instalador de DBeaver desde [https://dbeaver.io](https://dbeaver.io) y sigue las instrucciones de instalación para tu sistema operativo.
+
+2. Abre DBeaver y crea una nueva conexión.
+   - Haz clic en "Nuevo" para crear una nueva conexión a la base de datos.
+   - Selecciona "PostgreSQL" como el tipo de base de datos.
+
+3. Configura la conexión a PostgreSQL.
+   - Ingresa los siguientes detalles de conexión:
+     - Host: `localhost` (o la dirección IP del contenedor de Docker donde se encuentra PostgreSQL)
+     - Puerto: `5432`
+     - Base de datos: `nath`
+     - Usuario: `airflow`
+     - Contraseña: (la contraseña configurada para el usuario `airflow`)
+   - Haz clic en "Probar conexión" para verificar que la conexión se establece correctamente.
+
+4. Crea la base de datos para Airflow.
+   - Una vez que la conexión se haya establecido correctamente, haz clic con el botón derecho en la conexión en DBeaver y selecciona "Crear base de datos".
+   - Asigna el nombre "nath" a la base de datos y confirma la creación.
+
+5. Verifica la conexión y la base de datos.
+   - Expande la conexión en DBeaver y verifica que la base de datos "nath" esté presente.
+
+Con estos pasos, has configurado correctamente la conexión a PostgreSQL y creado la base de datos (en mi caso) "nath" para Airflow. Asegúrate de utilizar la dirección IP correcta y la contraseña adecuada para el usuario `airflow` según tu entorno.
+
+***_Recuerda que Airflow utiliza esta base de datos para almacenar la metadatos y configuraciones relacionadas con los DAGs y tareas._***
+
+<hr> 
+
+<h3 align="left">Configuracion d ela base de Datos</h3>
+
 
 
 
