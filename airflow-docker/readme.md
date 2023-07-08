@@ -168,16 +168,16 @@ El código proporcionado muestra la configuración del DAG y la creación de tar
 
 <h3 align="left">9. Definición de las tareas</h3>
 
-Se definen las tareas utilizando objetos PythonOperator. Cada tarea tiene un identificador (task_id), una función de Python (python_callable) que se ejecutará como parte de la tarea y el DAG al que pertenece (dag).
+Se definen las tareas utilizando objetos `PythonOperator`. Cada tarea tiene un identificador **(task_id)**, una función de Python **(python_callable)** que se ejecutará como parte de la tarea y el DAG al que pertenece (dag).
 
-Algunas de las tareas, como transform_task, mean_task, load_task, segment_task y load_segment_task, se definen con el parámetro provide_context=True. Esto permite que la función de Python asociada a cada tarea acceda al contexto de Airflow, lo que es útil para utilizar variables y resultados de tareas anteriores.
+Algunas de las tareas, como **transform_task**, **mean_task**, **load_task,** **segment_task** y **load_segment_task**, se definen con el parámetro `provide_context=True`. Esto permite que la función de Python asociada a cada tarea acceda al contexto de Airflow, lo que es útil para utilizar variables y resultados de tareas anteriores.
 
 <h3 align="left">10. Configuración de las dependecias de las tareas</h3>
 
-Por último, se establecen las dependencias entre las tareas utilizando el operador >>. En este caso, las tareas extract_task, transform_task, mean_task, load_task y segment_task dependen de la tarea extract_task, y la tarea load_segment_task depende de la tarea segment_task.
+Por último, se establecen las dependencias entre las tareas utilizando el operador >>. En este caso, las tareas `extract_task`, `transform_task`, `mean_task`, `load_task` y `segment_task` dependen de la tarea **extract_task**, y la tarea **load_segment_task** depende de la tarea **segment_task**.
 
 <hr> 
 
-#Espero que esta documentación sea de gran ayuda 👩‍💻💟!!!!! 
+# Espero que esta documentación sea de gran ayuda 👩‍💻💟!!!!! 
 
 
