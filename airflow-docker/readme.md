@@ -1,14 +1,16 @@
-<h1 align="center"></h1>
-<h3 align="center">Airflow en Docker</h3>
+<h1 align="center">Airflow en Docker</h1>
+<h3 align="center">ETL - Data Mining (para principiantes)</h3>
 
 <h4 align="left">Herramientas Utilizadas</h4>
-- 📝 Visual Studio Code
+- 📌 Visual Studio Code
 
-- 💬 Python 3.11.3 <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="20" height="20"/> </a>
+- 📌 Python 3.11.3 <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="20" height="20"/> </a>
   
-- 📫 Docker 23.0.5
+- 📌 Docker 23.0.5
+- 📌 Docker compose v2.17.3
+- 📌 Dbeaver 
 
-<h3 align="left">Paso a Paso</h3>
+<h3 align="left">Paso a Paso h3>
 <hr>
 <h3 align="left">Instalación</h3>
 1. Instala Visual Studio Code en tu máquina.
@@ -98,7 +100,7 @@ El código completo del DAG se encuentra en la carpeta "dags" de este repositori
 ### Desarrollar un DAG con procesos ETL (Extract - Trasmform - Load)
 El código lo puedes encontrar en la carpeta dags de este repositorio. 
 
-1. Importación de paquetes
+<h4 align="left">1. Importación de paquetes</h4>
 
 Se importan los paquetes necesarios para el funcionamiento del DAG, como `DAG`, `PythonOperator`, `BranchPythonOperator`, `datetime`, `pandas`, `psycopg2` y `numpy`.
 
@@ -116,7 +118,7 @@ Los datos transformados se almacenan en una lista llamada `transformed_data`. A 
 
 Finalmente, la función devuelve la lista transformed_data.
 
-4. Cálculo de la Media
+4. Cálculo de la Media (proceso de Data Mining)
 
 La función **calculate_mean()** recibe un parámetro task_instance que representa la instancia de la tarea en Airflow. Utiliza el método xcom_pull() del objeto task_instance para obtener los datos transformados obtenidos en el paso anterior mediante el uso de task_ids='transform_data' y key='transformed_data'.
 
@@ -132,7 +134,7 @@ La **función load_data()** Obtiene los datos transformados (transformed_data) y
 
 Una vez que se han insertado todos los datos, se realiza la confirmación de la transacción (conn.commit()) y se cierran el cursor y la conexión a la base de datos.
 
-6. Segmentación de los Datos
+6. Segmentación de los Datos (proceso de Data Mining)
    
 Obtiene los datos extraídos (data) del paso anterior mediante el uso de task_ids='extract_data'.
 
@@ -153,6 +155,7 @@ La función **load_segmented_data()** obtiene los datos segmentados (transformed
 Una vez que se han insertado todos los datos, se realiza la confirmación de la transacción (conn.commit()) y se cierran el cursor y la conexión a la base de datos. Revisar que la tabla segmented_data se haya creado correctamente en la bd. 
 
 8. Configuración del DAG
+   
 El código proporcionado muestra la configuración del DAG y la creación de tareas utilizando el objeto PythonOperator en Airflow.
 
 - Se define un diccionario `default_args` que contiene los argumentos por defecto para el DAG, como el propietario (owner) y la fecha de inicio (start_date). Estos argumentos se utilizan para establecer las características generales del DAG.
