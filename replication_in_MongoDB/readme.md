@@ -40,7 +40,7 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 - Flask: Flask es una biblioteca de Python, por lo que no requiere una descarga separada. Puedes instalar Flask utilizando el gestor de paquetes de Python, pip. Ejecuta el siguiente comando en tu terminal para instalar Flask: **pip install Flask**
 - Python: Puedes descargar la última versión estable de Python desde el sitio web oficial de Python: 🔗https://www.python.org/
 
-## Herramientas Uilizadas
+## Herramientas Utilizadas
 
 📌 Visual Studio code
 
