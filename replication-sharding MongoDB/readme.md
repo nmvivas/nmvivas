@@ -55,7 +55,7 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 Una vez con el docker instalado y configurado correctamente, continuamos con la creación de la red de contenedores.
 
 ## Clona el Repositorio
-1. Clona este proyecto en una carpeta de tu escritorio `git clone <urle http>`
+1. Clona este proyecto en una carpeta de tu escritorio `git clone <url http>`
 2. Abre la carpeta clonada con tu IDE favorito. De preferencia Visual Studio Code.
 3. Revisa las carpetas y subcarpetas creadas.
 
@@ -135,18 +135,18 @@ Abre una nueva terminal en el directorio de **users_management2**
 28. Ejecuta el siguiente comando `docker build -t mongo-etl . `
 29. Luego, ejecuta `docker run --name mongo_etl_app mongo-etl`
 
-Este proceso puede tardar unos minutos... 
+Este proceso puede tardar unos minutos... ⌚
 
-Una vez completada la tarea... el ETL cargar la nueva data en el conjunto de réplicas 2. 
+Una vez completada la tarea... el ETL carga la nueva data en el conjunto de réplicas 2. 
 
 🟢 Verificar que los datos se hayan cargado correctamente. 
 Realiza la visualizacion de datos en la App we (solo lectura).
 
 <hr> 
 
-### Espero que este docs te haya servido 😃💟
+# Espero que este docs te haya servido 😃💟
 
-## 🪧 Autores
+## 📗 Autores
 👨‍💻 Cris Armas
 👩‍💻 Nat Vivas
 👨‍💻 Chark Zambrano
