@@ -73,7 +73,8 @@ Elimina las imágenes, containers y volúmenes que no utilizas.
 -  Abre el CMD
 -  digita **ip config**
 -  copia la dirección IP en la que estás conectado (puede ser inalámbrica o Ethernet)
--  Y REEMPLAZA la IP en los siguientes archivos: 
+-  Y REEMPLAZA la IP en los siguientes archivos:
+  ```
    - mongo_etl_project/app.py
    - sharding-mongo-espe/mapping
    - sharding-mongo-espe2/mapping2
@@ -83,6 +84,7 @@ Elimina las imágenes, containers y volúmenes que no utilizas.
    - users_management2/app/page.js
    - users_management_api2/server.js
    - users_management_api2/script.js
+```
      
 ⚠ Si esta sutilizando VSTudio code, se te hará más fácil si usas `Ctrl F`
 
@@ -100,7 +102,7 @@ No olvides reemplazar la IP también en el archivo `comands.txt` para que se te 
 Puedes ayudarte de los comandos en el archivo `comands.txt`
 
 4. Abre una terminal en VStudio code en el directorio \sharding-mongo-espe
-5. Ejecuta el primer comando `docker-compose -f config-server/docker-compose.yaml up -d`
+5. Ejecuta el primer comando ``` docker-compose -f config-server/docker-compose.yaml up -d ```
 6. Abre una terminal CMD en tu sistema
 7. Ejecuta el segundo comando `mongosh mongodb://192.168.XX.XXX:40001` . La IP debe ser la que reemplzaste. Tu propia IP.
 8. Se abre la terminal de mongo
