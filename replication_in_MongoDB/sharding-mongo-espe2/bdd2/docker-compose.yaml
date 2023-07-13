@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  master4:
+    container_name: master4
+    image: mongo
+    command: mongod --shardsvr --replSet masters --port 27017 --dbpath /data/db
+    ports:
+      - 50005:27017
+    volumes:
+      - master4:/data/db
+
+  master5:
+    container_name: master5
+    image: mongo
+    command: mongod --shardsvr --replSet masters --port 27017 --dbpath /data/db
+    ports:
+      - 50006:27017
+    volumes:
+      - master5:/data/db
+  
+  master6:
+    container_name: master6
+    image: mongo
+    command: mongod --shardsvr --replSet masters --port 27017 --dbpath /data/db
+    ports:
+      - 50007:27017
+    volumes:
+      - master6:/data/db
+
+volumes:
+  master4: {}
+  master5: {}
+  master6: {}
+

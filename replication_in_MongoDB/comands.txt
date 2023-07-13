@@ -1,0 +1,94 @@
+# CONFIGURACION ETL
+
+docker build -t mongo-etl .
+docker run --name mongo_etl_app mongo-etl
+
+# CONFIGURACION APP 1
+
+docker network create apis1
+
+docker build -t node_server .
+docker run -p 3001:3001 --network=apis1 --name node_server_container node_server
+
+docker build -t next_app .
+docker run -p 3000:3000 --network=apis1 --name next_app_container next_app
+
+# CONFIGURACION APP 2
+
+docker network create apis2
+
+docker build -t node_server2 .
+docker run -p 3003:3003 --network=apis2 --name node_server_container2 node_server2
+
+docker build -t next_app2 .
+docker run -p 3002:3002 --network=apis2 --name next_app_container2 next_app2
+
+# CONFIGURACION BASES DE DATOS 1
+
+docker-compose -f config-server/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.112:40001
+
+rs.initiate(
+  {
+    _id: "cfgrs",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "192.168.43.112:40001" },
+      { _id : 1, host : "192.168.43.112:40002" },
+      { _id : 2, host : "192.168.43.112:40003" }
+    ]
+  }
+)
+
+docker-compose -f bdd2/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.112:50001
+
+rs.initiate(
+  {
+    _id: "masters",
+    members: [
+      { _id : 0, host : "192.168.43.112:50001" },
+      { _id : 1, host : "192.168.43.112:50002" },
+      { _id : 2, host : "192.168.43.112:50003" }
+    ]
+  }
+)
+
+docker-compose -f mapping/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.112:60000
+sh.addShard("masters/192.168.43.112:50002,192.168.43.112:50003")
+
+# CONFIGURACION BASES DE DATOS 2
+
+docker-compose -f config-server2/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.112:40004
+
+rs.initiate(
+  {
+    _id: "cfgrs2",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "192.168.43.112:40004" },
+      { _id : 1, host : "192.168.43.112:40005" },
+      { _id : 2, host : "192.168.43.112:40006" }
+    ]
+  }
+)
+
+docker-compose -f bdd2/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.112:50005
+
+rs.initiate(
+  {
+    _id: "masters",
+    members: [
+      { _id : 0, host : "192.168.43.112:50005" },
+      { _id : 1, host : "192.168.43.112:50006" },
+      { _id : 2, host : "192.168.43.112:50007" }
+    ]
+  }
+)
+
+docker-compose -f mapping2/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.112:60001
+sh.addShard("masters/192.168.43.112:50006,192.168.43.112:50007")
