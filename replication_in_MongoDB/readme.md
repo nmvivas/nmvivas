@@ -103,7 +103,9 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
 
 4. Abre una terminal en VStudio code en el directorio \sharding-mongo-espe
 5. Ejecuta el primer comando
+   
 ``` docker-compose -f config-server/docker-compose.yaml up -d ```
+
 7. Abre una terminal CMD en tu sistema
 8. Ejecuta el segundo comando `mongosh mongodb://192.168.XX.XXX:40001` . La IP debe ser la que reemplzaste. Tu propia IP.
 9. Se abre la terminal de mongo
