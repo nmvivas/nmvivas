@@ -110,7 +110,9 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
 8. Ejecuta el segundo comando `mongosh mongodb://192.168.XX.XXX:40001` . La IP debe ser la que reemplzaste. Tu propia IP.
 9. Se abre la terminal de mongo
 10. Ejecuta el tercer comando
-    - rs.initiate(
+
+```
+    rs.initiate(
   {
     _id: "cfgrs",
     configsvr: true,
@@ -121,15 +123,17 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
     ]
   }
 )
+```
 
-11. Si todo esta bien aparecerá un `Ok`
-12. Digita `exit`
-13. Vuelve al terminal de VStudio
-14. Ejecuta el cuarto comando `docker-compose -f bdd/docker-compose.yaml up -d`
-15. Vuelve al CMD, en tu sistema y ejecuta el quinto comando `mongosh mongodb://192.168.XX.XXX:50001`
-16. Se abre la terminal de mongo
-17. Ejecuta el sexto comando
-    - rs.initiate(
+12. Si todo esta bien aparecerá un `Ok`
+13. Digita `exit`
+14. Vuelve al terminal de VStudio
+15. Ejecuta el cuarto comando `docker-compose -f bdd/docker-compose.yaml up -d`
+16. Vuelve al CMD, en tu sistema y ejecuta el quinto comando `mongosh mongodb://192.168.XX.XXX:50001`
+17. Se abre la terminal de mongo
+18. Ejecuta el sexto comando
+```
+    rs.initiate(
   {
     _id: "masters",
     members: [
@@ -139,16 +143,17 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
     ]
   }
 )
+```
 
-18. Si todo esta bien aparecerá un `Ok`
-19. Digita `exit`
-20. Vuelve al terminal de VStudio
-21. Ejecuta el séptimo comando `docker-compose -f mapping/docker-compose.yaml up -d`
-22. Vuelve al CMD, en tu sistema y ejecuta el octavo comando `mongosh mongodb://192.168.XX.XXX:60000`
-23. Se abre la terminal de mongo
-24. Ejecuta el noveno comando `sh.addShard("masters/192.168.43.112:50002,192.168.XX.XXX:50003")`
-25. Digita exit
-26. ### El primer conjunto de replicas está LISTO !!
+20. Si todo esta bien aparecerá un `Ok`
+21. Digita `exit`
+22. Vuelve al terminal de VStudio
+23. Ejecuta el séptimo comando `docker-compose -f mapping/docker-compose.yaml up -d`
+24. Vuelve al CMD, en tu sistema y ejecuta el octavo comando `mongosh mongodb://192.168.XX.XXX:60000`
+25. Se abre la terminal de mongo
+26. Ejecuta el noveno comando `sh.addShard("masters/192.168.43.112:50002,192.168.XX.XXX:50003")`
+27. Digita exit
+28. ### El primer conjunto de replicas está LISTO !!
 
 🟢 Verificar la conexion a las bases de datos mediante Mongo Compass. 
 
@@ -217,7 +222,7 @@ Una vez completada la tarea... el ETL carga la nueva data en el conjunto de rép
 🟢 Verificar que los datos se hayan cargado correctamente. 
 Realiza la visualizacion de datos en la App we (solo lectura).
 
-<hr> 
+<hr>
 
 # Espero que este docs te haya servido 😃💟
 ### Si deseas revisar cómo se realizó la creación y configuración de las réplicas,
