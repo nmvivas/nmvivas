@@ -1,0 +1,38 @@
+docker-compose -f config-server/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.116:40001
+
+rs.initiate(
+  {
+    _id: "cfgrs",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "192.168.43.116:40001" },
+      { _id : 1, host : "192.168.43.116:40002" },
+      { _id : 2, host : "192.168.43.116:40003" }
+    ]
+  }
+)
+
+docker-compose -f bdd/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.116:50001
+
+rs.initiate(
+  {
+    _id: "masters",
+    members: [
+      { _id : 0, host : "192.168.43.116:50001" },
+      { _id : 1, host : "192.168.43.116:50002" },
+      { _id : 2, host : "192.168.43.116:50003" }
+    ]
+  }
+)
+
+docker-compose -f mapping/docker-compose.yaml up -d
+mongosh mongodb://192.168.43.116:60000
+sh.addShard("masters/192.168.43.116:50001,192.168.43.116:50002,192.168.43.116:50003")
+---------------------------------------------------------------------------
+node script.js
+
+npm i
+npm run devStart
+npm run dev
