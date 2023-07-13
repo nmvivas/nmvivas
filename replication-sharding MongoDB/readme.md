@@ -15,11 +15,17 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 ## Tecnologías Utilizadas
 
 📌 Docker Desktop 23.0.5
+
 📌 Docker compose v2.17.3
+
 📌 Next.js
+
 📌 Node.js 18.16.1
+
 📌 Flask 2.2.5
+
 📌 Pyhton 3.11.3
+
 
 ## Guía de Instalación
 
@@ -33,6 +39,7 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 ## Herramientas Uilizadas
 
 📌 Visual Studio code
+
 📌 Mongo Compass
 
 
@@ -136,22 +143,15 @@ Una vez completada la tarea... el ETL cargar la nueva data en el conjunto de ré
 Realiza la visualizacion de datos en la App we (solo lectura).
 
 <hr> 
-### Espero que este docs te haya servido 😃💟 !!
+
+### Espero que este docs te haya servido 😃💟
+
+## 🪧 Autores
+👨‍💻 Cris Armas
+👩‍💻 Nat Vivas
+👨‍💻 Chark Zambrano
 
 
-
-
-
-
-
-
-   
-
-
-
-
-
-## Autore
 
 
 
