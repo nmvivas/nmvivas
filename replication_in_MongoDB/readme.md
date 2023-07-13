@@ -102,11 +102,12 @@ No olvides reemplazar la IP también en el archivo `comands.txt` para que se te 
 Puedes ayudarte de los comandos en el archivo `comands.txt`
 
 4. Abre una terminal en VStudio code en el directorio \sharding-mongo-espe
-5. Ejecuta el primer comando ``` docker-compose -f config-server/docker-compose.yaml up -d ```
-6. Abre una terminal CMD en tu sistema
-7. Ejecuta el segundo comando `mongosh mongodb://192.168.XX.XXX:40001` . La IP debe ser la que reemplzaste. Tu propia IP.
-8. Se abre la terminal de mongo
-9. Ejecuta el tercer comando
+5. Ejecuta el primer comando
+``` docker-compose -f config-server/docker-compose.yaml up -d ```
+7. Abre una terminal CMD en tu sistema
+8. Ejecuta el segundo comando `mongosh mongodb://192.168.XX.XXX:40001` . La IP debe ser la que reemplzaste. Tu propia IP.
+9. Se abre la terminal de mongo
+10. Ejecuta el tercer comando
     - rs.initiate(
   {
     _id: "cfgrs",
@@ -119,13 +120,13 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
   }
 )
 
-10. Si todo esta bien aparecerá un `Ok`
-11. Digita `exit`
-12. Vuelve al terminal de VStudio
-13. Ejecuta el cuarto comando `docker-compose -f bdd/docker-compose.yaml up -d`
-14. Vuelve al CMD, en tu sistema y ejecuta el quinto comando `mongosh mongodb://192.168.XX.XXX:50001`
-15. Se abre la terminal de mongo
-16. Ejecuta el sexto comando
+11. Si todo esta bien aparecerá un `Ok`
+12. Digita `exit`
+13. Vuelve al terminal de VStudio
+14. Ejecuta el cuarto comando `docker-compose -f bdd/docker-compose.yaml up -d`
+15. Vuelve al CMD, en tu sistema y ejecuta el quinto comando `mongosh mongodb://192.168.XX.XXX:50001`
+16. Se abre la terminal de mongo
+17. Ejecuta el sexto comando
     - rs.initiate(
   {
     _id: "masters",
@@ -137,15 +138,15 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
   }
 )
 
-17. Si todo esta bien aparecerá un `Ok`
-18. Digita `exit`
-19. Vuelve al terminal de VStudio
-20. Ejecuta el séptimo comando `docker-compose -f mapping/docker-compose.yaml up -d`
-21. Vuelve al CMD, en tu sistema y ejecuta el octavo comando `mongosh mongodb://192.168.XX.XXX:60000`
-22. Se abre la terminal de mongo
-23. Ejecuta el noveno comando `sh.addShard("masters/192.168.43.112:50002,192.168.XX.XXX:50003")`
-24. Digita exit
-25. ### El primer conjunto de replicas está LISTO !!
+18. Si todo esta bien aparecerá un `Ok`
+19. Digita `exit`
+20. Vuelve al terminal de VStudio
+21. Ejecuta el séptimo comando `docker-compose -f mapping/docker-compose.yaml up -d`
+22. Vuelve al CMD, en tu sistema y ejecuta el octavo comando `mongosh mongodb://192.168.XX.XXX:60000`
+23. Se abre la terminal de mongo
+24. Ejecuta el noveno comando `sh.addShard("masters/192.168.43.112:50002,192.168.XX.XXX:50003")`
+25. Digita exit
+26. ### El primer conjunto de replicas está LISTO !!
 
 🟢 Verificar la conexion a las bases de datos mediante Mongo Compass. 
 
