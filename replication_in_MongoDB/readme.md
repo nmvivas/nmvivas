@@ -67,8 +67,8 @@ Elimina las imágenes, containers y volúmenes que no utilizas.
 
 <hr>
 
-# Empecemos
-### Consideraciones Importantes 
+# --------  Empecemos --------
+### Consideraciones Importantes ‼
 -  Abre el CMD
 -  digita **ip config**
 -  copia la dirección IP en la que estás conectado (puede ser inalámbrica o Ethernet)
@@ -198,7 +198,7 @@ Realiza las operaciones CRUD.
 
 <hr> 
 
-## Ejecución del ETL 
+## Ejecución del API - ETL 
 
 44. Abre una terminal en el directorio \users_management
 45. Ejecuta el siguiente comando `docker build -t mongo-etl . `
