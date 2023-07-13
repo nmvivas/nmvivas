@@ -10,7 +10,8 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 
 ## Diagrama del Sistema
 
-![image](https://github.com/nmvivas/nmvivas/assets/75291166/430b1b4b-cd0e-4339-9138-f7ed7704d7d6)
+![image](https://github.com/nmvivas/nmvivas/assets/75291166/853fb0e4-fb96-47d6-8ed7-1c2fa52562d3)
+
 
 ## Tecnologías Utilizadas
 
@@ -18,9 +19,11 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 
 📌 Docker compose v2.17.3
 
-📌 Next.js
+📌 Next.js ()
 
-📌 Node.js 18.16.1
+📌 Node.js 18.16.1 (backend)
+
+📌 Material UI (frontend)
 
 📌 Flask 2.2.5
 
@@ -50,90 +53,156 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 
 ## 🔴🔴 Paso a Paso 
 
-<h> 
+<hr> 
 
-Una vez con el docker instalado y configurado correctamente, continuamos con la creación de la red de contenedores.
+Una vez con el docker instalado y configurado correctamente, continuamos con la creación de la red de contenedores para el alamcenamiento de las BD. 
+
+⚠ Se recomienda realizar una limpieza del docker antes de inciar con las configuraciones. 
+Elimina las imágenes, containers y volúmenes que no utilizas. 
 
 ## Clona el Repositorio
-1. Clona este proyecto en una carpeta de tu escritorio `git clone <url http>`
+1. Clona este proyecto en una carpeta de tu escritorio `git clone <url https>`
 2. Abre la carpeta clonada con tu IDE favorito. De preferencia Visual Studio Code.
 3. Revisa las carpetas y subcarpetas creadas.
 
-## Creación del conjunto de Réplicas 1
+<hr>
 
-5. Abre el CMD
-6. digita **ip config**
-7. copia la dirección IP en la que estás conectado (puede ser inalámbrica o Ethernet)
-5. Abre la carpeta **sharding-mongo-espe** encontrarás las subcarpetas `bdd`, `config-server` y `mapping`
-6. Cada subcarpeta contiene un archivo docker-compose.yaml
-7. Abre cada uno de los `docker-compose.yaml` y reemplaza la ip que está en el archivo por TU IP.
-8. Abre una terminal en el directorio de la carpeta **sharding-mongo-espe**
-9. Crea los contenedores siguiendo los comandos del archivo `comandos.txt`, adjunto en la raíz de la carpeta **sharding-mongo-espe**
-No olvides reemplazar la IP en este archivo también para evitar errores en la ejecución‼
+# Empecemos
+### Consideraciones Importantes 
+-  Abre el CMD
+-  digita **ip config**
+-  copia la dirección IP en la que estás conectado (puede ser inalámbrica o Ethernet)
+-  Y REEMPLAZA la IP en los siguientes archivos: 
+   - mongo_etl_project/app.py
+   - sharding-mongo-espe/mapping
+   - sharding-mongo-espe2/mapping2
+   - users_management/app/page.js
+   - users_management_api/server.js
+   - users_management_api/script.js
+   - users_management2/app/page.js
+   - users_management_api2/server.js
+   - users_management_api2/script.js
+     
+⚠ Si esta sutilizando VSTudio code, se te hará más fácil si usas `Ctrl F`
 
-### intrucciones de ejecución del archivo comandos.txt
-- los comandos que dicen docker-compose, se ejecutan en la terminal del IDE (VStudio code)
-- los comandos que dicen mongosh, se ejecutan  en el CMD
-- Los comando para incializar se ejecutan dentro de la terminal de mongo.
+No olvides reemplazar la IP también en el archivo `comands.txt` para que se te facilite la ejecución de los próximos comandos ‼
+
+### intrucciones para la ejecución de comandos del archivo comands.txt
+- los comandos que inician con docker-compose, se ejecutan en la terminal del IDE (VStudio code)
+- los comandos que inician con mongosh, se ejecutan  en el CMD (sino funciona con mongosh, intenta solo con mongo)
+- Los comandos para incializar se ejecutan dentro de la terminal de mongo. (se abre con el comando anterior)
+
+<hr> 
+
+## Configuración del conjunto de Réplicas 1
+
+Puedes ayudarte de los comandos en el archivo `comands.txt`
+
+4. Abre una terminal en VStudio code en el directorio \sharding-mongo-espe
+5. Ejecuta el primer comando `docker-compose -f config-server/docker-compose.yaml up -d`
+6. Abre una terminal CMD en tu sistema
+7. Ejecuta el segundo comando `mongosh mongodb://192.168.XX.XXX:40001` . La IP debe ser la que reemplzaste. Tu propia IP.
+8. Se abre la terminal de mongo
+9. Ejecuta el tercer comando
+    - rs.initiate(
+  {
+    _id: "cfgrs",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "192.168.XX.XXX:40001" },
+      { _id : 1, host : "192.168.XX.XXX:40002" },
+      { _id : 2, host : "192.168.XX.XXX:40003" }
+    ]
+  }
+)
+
+10. Si todo esta bien aparecerá un `Ok`
+11. Digita `exit`
+12. Vuelve al terminal de VStudio
+13. Ejecuta el cuarto comando `docker-compose -f bdd2/docker-compose.yaml up -d`
+14. Vuelve al CMD, en tu sistema y ejecuta el quinto comando `mongosh mongodb://192.168.XX.XXX:50001`
+15. Se abre la terminal de mongo
+16. Ejecuta el sexto comando
+    - rs.initiate(
+  {
+    _id: "masters",
+    members: [
+      { _id : 0, host : "192.168.XX.XXX:50001" },
+      { _id : 1, host : "192.168.XX.XXX:50002" },
+      { _id : 2, host : "192.168.XX.XXX:50003" }
+    ]
+  }
+)
+
+17. Si todo esta bien aparecerá un `Ok`
+18. Digita `exit`
+19. Vuelve al terminal de VStudio
+20. Ejecuta el séptimo comando `docker-compose -f mapping/docker-compose.yaml up -d`
+21. Vuelve al CMD, en tu sistema y ejecuta el octavo comando `mongosh mongodb://192.168.XX.XXX:60000`
+22. Se abre la terminal de mongo
+23. Ejecuta el noveno comando `sh.addShard("masters/192.168.43.112:50002,192.168.XX.XXX:50003")`
+24. Digita exit
+25. ### Listo, la configuracion del primero conjunto de replicas está LISTO !!
 
 🟢 Verificar la conexion a las bases de datos mediante Mongo Compass. 
 
+<hr> 
 
-## Creacion del conjunto de Réplicas 2
+## Configuración del conjunto de Réplicas 2
 
-10. Abre la carpeta **sharding-mongo-espe2** encontrarás las subcarpetas `bdd2`, `config-server2` y `mapping2`
-11. Cada subcarpeta contiene un archivo docker-compose.yaml
-12. Abre cada uno de los `docker-compose.yaml` y no olvides reemplazar la ip que está en el archivo por TU IP.
-13. Abre una terminal en el directorio de la carpeta **sharding-mongo-espe2**
-14.  Crea los contenedores siguiendo los comandos del archivo `comandos.txt`, adjunto en la raíz de la carpeta **sharding-mongo-espe2**
-No olvides reemplazar la IP en este archivo también para evitar errores en la ejecución‼
+En este punto los pasos se repiten con el primer conjunto de replicas. 
 
-### intrucciones de ejecución del archivo comandos.txt
-- los comandos que dicen docker-compose, se ejecutan en la terminal del IDE (VStudio code)
-- los comandos que dicen mongosh, se ejecutan  en el CMD
-- Los comando para incializar se ejecutan dentro de la terminal de mongo.
+26. Abre la carpeta **sharding-mongo-espe2**
+27. Abre una terminal en VStudio code en el directorio \sharding-mongo-espe2
+28. Ejecuta los comandos del archivo `comands.txt` con la misma secuencia de pasos que el conjunto de réplicas 1.
+
+... (pasos anteriores)
+
+### Listo, la configuracion del primero conjunto de replicas está LISTO !!
 
 🟢 Verificar la conexion a las bases de datos mediante Mongo Compass. 
 
+<hr> 
 
-## Gestión del conjunto de réplicas 1 mediante un CRUD 
+## Gestión del conjunto de réplicas 1 mediante CRUD 
 
-15. Abre la carpeta **users_management_api**
-16. Abre una terminal en el directorio de la carpeta users_management_api
-17. Ejecuta el siguiente comando `npm i`. Este permitirá instalar los paquetes de node modules necesarios.
-18. Ya instalado, ejecuta el comando `npm run devStart`. Este permitirá levantar el servicio del back de nuestra aplicacion web.
-19. Una vez ejecutado. Nos aparecerá una linea al final indicando el puerto en el que está corriendo. `3001`
+29. Abre la carpeta **users_management**
+30. Abre una terminal en el directorio \users_management
+31. Ejecuta el comando `npm i` para instalar las dependecias de node js . 
+32. Ejecuta en secuencia cada uno de los comandos proporcionados en el archivo `comands.txt`
+33. Una vez ejecutado. Nos aparecerá una linea al final indicando la Url de nuestra app web
+34. Abre en el navegado esa URL y verifica que la aplicacion se levantó.
+35. No hay datos.
+36. Abre una una nueva terminal y ejecuta el comando `node script.js` para cargar nuestra base de datos.
 
-Abre una nueva terminal en el directorio de **users_management**
-
-20. Ejecuta el siguiente comando `npm i`. Este permitirá instalar los paquetes de node modules necesarios.
-22. Ya instalado, ejecuta el comando `npm run dev`. Este permitirá levantar el servicio del front de nuestra aplicacion web.
-23. Una vez ejecutado. Nos aparecerá una linea al final indicando la Url de nuestra app web
-25. Abre en el navegado esa URL y verifica que la aplicacion se levantó.
-26. No hay datos.
-27. Abre una una nueva terminal y ejecuta el comando `node script.js` para cargar nuestra base de datos.
+### Listo, tenemos levantada nuestra primera aplicacion web en el puerto 3000:3000.
 
 🟢 Verificar que los datos se hayan cargado correctamente. 
 Realiza las operaciones CRUD.
 
+<hr> 
+
 ## Gestión del conjunto de réplicas 2 (solo lectura)
 
-15. Abre la carpeta **users_management_api2**
-16. Abre una terminal en el directorio de la carpeta users_management_api2
-17. Ejecuta el siguiente comando `npm i`. Este permitirá instalar los paquetes de node modules necesarios.
-18. Ya instalado, ejecuta el comando `npm run devStart`. Este permitirá levantar el servicio del back de nuestra aplicacion web.
-19. Una vez ejecutado. Nos aparecerá una linea al final indicando el puerto en el que está corriendo. `3002`
+37. Abre la carpeta **users_management2**
+38. Abre una terminal en el directorio \users_management2
+39. Ejecuta el comando `npm i` para instalar las dependecias de node js . 
+40. Ejecuta en secuencia cada uno de los comandos proporcionados en el archivo `comands.txt`
+41. Una vez ejecutado. Nos aparecerá una linea al final indicando la Url de nuestra app web
+42. Abre en el navegado esa URL y verifica que la aplicacion se levantó.
+43. No hay datos.
 
-Abre una nueva terminal en el directorio de **users_management2**
+### Listo, tenemos levantada nuestra primera aplicacion web en el puerto 3003:3003.
 
-20. Ejecuta el siguiente comando `npm i`. Este permitirá instalar los paquetes de node modules necesarios.
-22. Ya instalado, ejecuta el comando `npm run dev`. Este permitirá levantar el servicio del front de nuestra aplicacion web.
-23. Una vez ejecutado. Nos aparecerá una linea al final indicando la Url de nuestra app web
-25. Abre en el navegado esa URL y verifica que la aplicacion se levantó.
-26. No hay datos.
-27. Abre una una nueva terminal en el directorio de  **mongo_etl_project** para ejecutar los procesos ETL
-28. Ejecuta el siguiente comando `docker build -t mongo-etl . `
-29. Luego, ejecuta `docker run --name mongo_etl_app mongo-etl`
+### Pero no hay datos!!!!! Ejecutemos el ETL 
+
+<hr> 
+
+## Ejecución del ETL 
+
+44. Abre una terminal en el directorio \users_management
+45. Ejecuta el siguiente comando `docker build -t mongo-etl . `
+46. Luego, ejecuta el siguiente comando `docker run --name mongo_etl_app mongo-etl`
 
 Este proceso puede tardar unos minutos... ⌚
 
