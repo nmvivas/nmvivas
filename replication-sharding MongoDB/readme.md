@@ -1,5 +1,6 @@
 # Docs - Replicación de Bases de Datos en MongoDB con ETL y Visualización de Datos en una Aplicación Web - EN DOCKER ‼
 <hr>
+
 ## Descripción del Proyecto
 
 - Conjunto de tres réplicas de bases de datos MongoDB, con un nodo primario y dos nodos secundarios. Aplicando la arquitectura de MongoDB
