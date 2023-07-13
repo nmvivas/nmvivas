@@ -29,6 +29,7 @@ RÉPLICA SET. _Revisar documentacion para más información_ 🔗 https://www.mo
 
 📌 Pyhton 3.11.3
 
+⚠ No olvides tener mongo shell funcionando. 
 
 ## Guía de Instalación
 
@@ -119,7 +120,7 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
 10. Si todo esta bien aparecerá un `Ok`
 11. Digita `exit`
 12. Vuelve al terminal de VStudio
-13. Ejecuta el cuarto comando `docker-compose -f bdd2/docker-compose.yaml up -d`
+13. Ejecuta el cuarto comando `docker-compose -f bdd/docker-compose.yaml up -d`
 14. Vuelve al CMD, en tu sistema y ejecuta el quinto comando `mongosh mongodb://192.168.XX.XXX:50001`
 15. Se abre la terminal de mongo
 16. Ejecuta el sexto comando
