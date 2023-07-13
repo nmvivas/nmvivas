@@ -142,7 +142,7 @@ Puedes ayudarte de los comandos en el archivo `comands.txt`
 22. Se abre la terminal de mongo
 23. Ejecuta el noveno comando `sh.addShard("masters/192.168.43.112:50002,192.168.XX.XXX:50003")`
 24. Digita exit
-25. ### Listo, la configuracion del primero conjunto de replicas está LISTO !!
+25. ### El primer conjunto de replicas está LISTO !!
 
 🟢 Verificar la conexion a las bases de datos mediante Mongo Compass. 
 
@@ -158,7 +158,7 @@ En este punto los pasos se repiten con el primer conjunto de replicas.
 
 ... (pasos anteriores)
 
-### Listo, la configuracion del primero conjunto de replicas está LISTO !!
+### El segundo conjunto de replicas está LISTO !!
 
 🟢 Verificar la conexion a las bases de datos mediante Mongo Compass. 
 
@@ -175,7 +175,7 @@ En este punto los pasos se repiten con el primer conjunto de replicas.
 35. No hay datos.
 36. Abre una una nueva terminal y ejecuta el comando `node script.js` para cargar nuestra base de datos.
 
-### Listo, tenemos levantada nuestra primera aplicacion web en el puerto 3000:3000.
+### Listo, tenemos levantada nuestra primera aplicacion web con un CRUD de usuarios, en el puerto 3000:3000.
 
 🟢 Verificar que los datos se hayan cargado correctamente. 
 Realiza las operaciones CRUD.
@@ -192,7 +192,7 @@ Realiza las operaciones CRUD.
 42. Abre en el navegado esa URL y verifica que la aplicacion se levantó.
 43. No hay datos.
 
-### Listo, tenemos levantada nuestra primera aplicacion web en el puerto 3003:3003.
+### Listo, tenemos levantada nuestra segunda aplicacion web solo de lectura, en el puerto 3003:3003.
 
 ### Pero no hay datos!!!!! Ejecutemos el ETL 
 
