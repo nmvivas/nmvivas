@@ -174,7 +174,7 @@ En este punto los pasos se repiten con el primer conjunto de replicas.
 33. Una vez ejecutado. Nos aparecerá una linea al final indicando la Url de nuestra app web
 34. Abre en el navegado esa URL y verifica que la aplicacion se levantó.
 35. No hay datos.
-36. Abre una una nueva terminal y ejecuta el comando `node script.js` para cargar nuestra base de datos.
+36. Abre una una nueva terminal en el directorio \users_management_api y ejecuta el comando `node script.js` para cargar nuestra base de datos.
 
 ### Listo, tenemos levantada nuestra primera aplicacion web con un CRUD de usuarios, en el puerto 3000:3000.
 
@@ -201,7 +201,7 @@ Realiza las operaciones CRUD.
 
 ## Ejecución del API - ETL 
 
-44. Abre una terminal en el directorio \users_management
+44. Abre una terminal en el directorio \mongo_etl_project
 45. Ejecuta el siguiente comando `docker build -t mongo-etl . `
 46. Luego, ejecuta el siguiente comando `docker run --name mongo_etl_app mongo-etl`
 
