@@ -214,6 +214,10 @@ Realiza la visualizacion de datos en la App we (solo lectura).
 <hr> 
 
 # Espero que este docs te haya servido 😃💟
+### Si deseas revisar cómo se realizó la creación y configuración de las réplicas,
+### Visita el siguiente enlace 🔗https://www.youtube.com/watch?v=7Lp6R4CmuKE
+
+<hr> 
 
 ## 📗 Autores
 👨‍💻 Cris Armas
