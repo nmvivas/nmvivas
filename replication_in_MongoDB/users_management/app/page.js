@@ -58,6 +58,9 @@ const style = {
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
+  const handleCancel = () => {
+    setShowModal(false);
+  };
   const [selected, setSelected] = useState({
     cedula: "",
     nombre: "",
@@ -75,6 +78,21 @@ export default function Home() {
     usuario: "",
     password: "",
   });
+  const handleNewUserCancel = () => {
+    setShowCreateModal(false);
+  };
+
+  // Función de validación de email
+function validateEmail(email) {
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  return emailRegex.test(email);
+}
+
+// Función de validación de contraseña
+function validatePassword(password) {
+  const passwordRegex = /^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+  return passwordRegex.test(password);
+}
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -87,7 +105,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios("http://192.168.43.112:3001/users");
+      const result = await axios("http://192.168.147.7:3001/users");
       setUsers(result.data);
     }
 
@@ -114,7 +132,14 @@ export default function Home() {
             variant="standard"
             value={newUserForm.cedula}
             onChange={(e) => {
-              setNewUserForm({ ...newUserForm, cedula: e.target.value });
+              const numericValue = e.target.value.replace(/\D/g, ""); // Remover todos los caracteres no numéricos
+              const limitedValue = numericValue.slice(0, 10); // Limitar la longitud a 8 dígitos
+              setNewUserForm({ ...newUserForm, cedula: limitedValue });
+            }}
+            inputProps={{
+              pattern: "[0-9]*", // Solo permite caracteres numéricos
+              maxLength: 10, // Limita la longitud a 8 dígitos
+              inputMode: "numeric", // Configura el teclado para mostrar el modo numérico en dispositivos móviles
             }}
           />
           <TextField
@@ -124,7 +149,8 @@ export default function Home() {
             variant="standard"
             value={newUserForm.nombre}
             onChange={(e) => {
-              setNewUserForm({ ...newUserForm, nombre: e.target.value });
+              const onlyLetters = e.target.value.replace(/[^A-Za-zÁ-ÿ\s]/g, ""); // Remover todos los caracteres que no sean letras o espacios
+              setNewUserForm({ ...newUserForm, nombre: onlyLetters });
             }}
           />
           <TextField
@@ -136,6 +162,8 @@ export default function Home() {
             onChange={(e) => {
               setNewUserForm({ ...newUserForm, email: e.target.value });
             }}
+            error={!validateEmail(newUserForm.email)} // Validar si el email es válido
+            helperText={!validateEmail(newUserForm.email) ? 'El formato del email es inválido' : ''}
           />
           <TextField
             sx={{ width: "100%", marginBottom: "15px" }}
@@ -144,7 +172,8 @@ export default function Home() {
             variant="standard"
             value={newUserForm.usuario}
             onChange={(e) => {
-              setNewUserForm({ ...newUserForm, usuario: e.target.value });
+              const noSpacesValue = e.target.value.replace(/\s/g, ""); // Remover espacios en blanco
+              setNewUserForm({ ...newUserForm, usuario: noSpacesValue });
             }}
           />
           <TextField
@@ -154,8 +183,11 @@ export default function Home() {
             variant="standard"
             value={newUserForm.password}
             onChange={(e) => {
-              setNewUserForm({ ...newUserForm, password: e.target.value });
+              const passwordValue = e.target.value;
+              setNewUserForm({ ...newUserForm, password: passwordValue });
             }}
+            error={!validatePassword(newUserForm.password)} // Validar si la contraseña es válida
+            helperText={!validatePassword(newUserForm.password) ? 'La contraseña debe tener al menos 8 caracteres y contener un carácter especial' : ''}
           />
           <Box
             sx={{
@@ -168,15 +200,17 @@ export default function Home() {
               sx={{
                 marginRight: 2,
                 backgroundColor: "error.main",
+                color: "white",
               }}
               variant="contained"
+              onClick={handleNewUserCancel}
             >
               Cancel
             </Button>
             <Button
               onClick={async () => {
                 const response = await axios.post(
-                  "http://192.168.43.112:3001/users/create",
+                  "http://192.168.147.7:3001/users/create",
                   newUserForm
                 );
                 console.log("asdasd");
@@ -216,7 +250,14 @@ export default function Home() {
             variant="standard"
             value={selected.cedula}
             onChange={(e) => {
-              setSelected({ ...selected, cedula: e.target.value });
+              const numericValue = e.target.value.replace(/\D/g, ""); // Remover todos los caracteres no numéricos
+              const limitedValue = numericValue.slice(0, 10); // Limitar la longitud a 10 dígitos
+              setSelected({ ...selected, cedula: limitedValue });
+            }}
+            inputProps={{
+              pattern: "[0-9]*", // Solo permite caracteres numéricos
+              maxLength: 10, // Limita la longitud a 10 dígitos
+              inputMode: "numeric", // Configura el teclado para mostrar el modo numérico en dispositivos móviles
             }}
           />
           <TextField
@@ -238,6 +279,8 @@ export default function Home() {
             onChange={(e) => {
               setSelected({ ...selected, email: e.target.value });
             }}
+            error={!validateEmail(selected.email)} // Validar si el email es válido
+            helperText={!validateEmail(selected.email) ? 'El formato del email es inválido' : ''}
           />
           <TextField
             sx={{ width: "100%", marginBottom: "15px" }}
@@ -270,8 +313,9 @@ export default function Home() {
               sx={{
                 marginRight: 2,
                 backgroundColor: "error.main",
+                color: "white",
               }}
-              variant="contained"
+              onClick={handleCancel}
             >
               Cancel
             </Button>
@@ -281,7 +325,7 @@ export default function Home() {
               }}
               onClick={async () => {
                 const response = await axios.post(
-                  "http://192.168.43.112:3001/users/edit",
+                  "http://192.168.147.7:3001/users/edit",
                   { ...selected }
                 );
 
@@ -385,7 +429,7 @@ export default function Home() {
                   <Box
                     onClick={async () => {
                       const response = await axios.post(
-                        "http://192.168.43.112:3001/users/delete",
+                        "http://192.168.147.7:3001/users/delete",
                         { _id: row._id }
                       );
 
@@ -410,6 +454,6 @@ export default function Home() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Box>
-  );
+    </Box>
+  );
 }

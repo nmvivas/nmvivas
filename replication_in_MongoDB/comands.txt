@@ -1,27 +1,3 @@
-# CONFIGURACION ETL
-
-docker build -t mongo-etl .
-docker run --name mongo_etl_app mongo-etl
-
-# CONFIGURACION APP 1
-
-docker network create apis1
-
-docker build -t node_server .
-docker run -p 3001:3001 --network=apis1 --name node_server_container node_server
-
-docker build -t next_app .
-docker run -p 3000:3000 --network=apis1 --name next_app_container next_app
-
-# CONFIGURACION APP 2
-
-docker network create apis2
-
-docker build -t node_server2 .
-docker run -p 3003:3003 --network=apis2 --name node_server_container2 node_server2
-
-docker build -t next_app2 .
-docker run -p 3002:3002 --network=apis2 --name next_app_container2 next_app2
 
 # CONFIGURACION BASES DE DATOS 1
 
@@ -40,7 +16,7 @@ rs.initiate(
   }
 )
 
-docker-compose -f bdd2/docker-compose.yaml up -d
+docker-compose -f bdd/docker-compose.yaml up -d
 mongosh mongodb://192.168.43.112:50001
 
 rs.initiate(
@@ -92,3 +68,30 @@ rs.initiate(
 docker-compose -f mapping2/docker-compose.yaml up -d
 mongosh mongodb://192.168.43.112:60001
 sh.addShard("masters/192.168.43.112:50006,192.168.43.112:50007")
+
+
+# CONFIGURACION APP 1
+
+docker network create apis1
+
+docker build -t node_server .
+docker run -p 3001:3001 --network=apis1 --name node_server_container node_server
+
+docker build -t next_app .
+docker run -p 3000:3000 --network=apis1 --name next_app_container next_app
+
+# CONFIGURACION APP 2
+
+docker network create apis2
+
+docker build -t node_server2 .
+docker run -p 3003:3003 --network=apis2 --name node_server_container2 node_server2
+
+docker build -t next_app2 .
+docker run -p 3002:3002 --network=apis2 --name next_app_container2 next_app2
+
+
+# CONFIGURACION ETL
+
+docker build -t mongo-etl .
+docker run --name mongo_etl_app mongo-etl
