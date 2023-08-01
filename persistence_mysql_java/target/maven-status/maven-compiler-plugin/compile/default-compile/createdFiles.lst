@@ -1,0 +1,7 @@
+ec\edu\espe\producto\exceptions\PreexistingEntityException.class
+ec\edu\espe\producto\producto_.class
+ec\edu\espe\producto\productoServlet.class
+ec\edu\espe\producto\productoJpaController.class
+ec\edu\espe\producto\exceptions\IllegalOrphanException.class
+ec\edu\espe\producto\producto.class
+ec\edu\espe\producto\exceptions\NonexistentEntityException.class

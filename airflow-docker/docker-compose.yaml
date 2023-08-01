@@ -1,0 +1,60 @@
+version: '3.7'
+services:
+  webserver:
+    image: apache/airflow:2.6.2
+    restart: always
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-container:5432/nath
+      - AIRFLOW_CORE_FERNET_KEY=ZdDthkxjSIvK1XbWwgXiYVhRBa1MESJP_b1o5nJsi9g=
+      - _AIRFLOW_WWW_USER_CREATE=True
+      - _AIRFLOW_WWW_USER_USERNAME=airflow
+      - _AIRFLOW_WWW_USER_PASSWORD=airflow
+      - _AIRFLOW_WWW_USER_EMAIL=airflow@example.com
+      - _AIRFLOW_WWW_USER_FIRSTNAME=airflow
+      - _AIRFLOW_WWW_USER_LASTNAME=airflow
+      - _AIRFLOW_WWW_USER_ROLE=Admin
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    command: bash -c "airflow db init && airflow users create --username airflow --password airflow --firstname airflow --lastname airflow --role Admin --email airflow@example.com && airflow webserver"
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      - apachetl
+
+  scheduler:
+    image: apache/airflow:2.6.2
+    restart: always
+    depends_on:
+      - webserver
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-container:5432/nath
+      - AIRFLOW_CORE_FERNET_KEY=ZdDthkxjSIvK1XbWwgXiYVhRBa1MESJP_b1o5nJsi9g=
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    command: bash -c "airflow db init && airflow scheduler"
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-scheduler.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      - apachetl
+
+networks:
+  apachetl:
+    external: 
+      name: apachetl
+
